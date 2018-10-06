@@ -1,0 +1,32 @@
+FUNCTION ModFalsePos(xl, xu, es, imax, xr, iter, ea)
+    iter = 0
+    fl = f(xl)
+    fu = f(xu)
+    DO
+        xrold = xr
+        xr = xu – fu * (xl – xu) / (fl – fu)
+        fr = f(xr)
+        iter = iter + 1
+        IF xr <> 0 THEN
+            ea = Abs((xr – xrold) / xr) * 100
+        END IF
+        test = fl * fr
+        IF test < 0 THEN
+            xu = xr
+            fu = f(xu)
+            iu = 0
+            il = il +1
+            If il ≥ 2 THEN fl = fl / 2
+    ELSE IF test > 0 THEN
+        xl = xr
+    fl = f (xl)
+    il = 0
+    iu = iu + 1
+    IF iu ≥ 2 THEN fu = fu / 2
+        ELSE
+            ea = 0
+        END IF
+        IF ea < es 0R iter ≥ imax THEN EXIT
+    END DO
+    ModFalsePos = xr
+END ModFalsePos
